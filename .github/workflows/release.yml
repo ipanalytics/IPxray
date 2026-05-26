@@ -47,7 +47,7 @@ jobs:
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build release artifacts
-        run: scripts/build-release.sh "${{ steps.version.outputs.version }}"
+        run: sh scripts/build-release.sh "${{ steps.version.outputs.version }}"
 
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
