@@ -1,0 +1,72 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version, for example v0.3.0"
+        required: true
+        default: "v0.3.0"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.x"
+
+      - name: Test
+        run: go test ./...
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            version="${{ inputs.version }}"
+          else
+            version="${GITHUB_REF_NAME}"
+          fi
+
+          if [[ ! "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+.*$ ]]; then
+            echo "invalid release version: $version" >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build release artifacts
+        run: scripts/build-release.sh "${{ steps.version.outputs.version }}"
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipxray-${{ steps.version.outputs.version }}
+          path: dist/*
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.version }}" \
+            dist/ipxray_${{ steps.version.outputs.version }}_darwin_amd64.tar.gz \
+            dist/ipxray_${{ steps.version.outputs.version }}_darwin_arm64.tar.gz \
+            dist/ipxray_${{ steps.version.outputs.version }}_linux_amd64.tar.gz \
+            dist/ipxray_${{ steps.version.outputs.version }}_linux_arm64.tar.gz \
+            dist/ipxray_${{ steps.version.outputs.version }}_windows_amd64.zip \
+            dist/ipxray_${{ steps.version.outputs.version }}_windows_arm64.zip \
+            dist/checksums.txt \
+            --title "ipxray ${{ steps.version.outputs.version }}" \
+            --notes-file dist/RELEASE_NOTES.md \
+            --latest
