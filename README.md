@@ -371,6 +371,21 @@ go run ./cmd/ipxray doctor
 
 The codebase is dependency-light by design. Adapters are the only package that knows source-specific artifact structure; resolver and confidence logic operate on normalized evidence.
 
+### Release Builds
+
+Compiled releases are built by GitHub Actions from `.github/workflows/release.yml`.
+
+Tag-based release:
+
+```bash
+git tag v0.3.0
+git push origin v0.3.0
+```
+
+The workflow builds Linux, macOS, and Windows binaries for `amd64` and `arm64`, publishes a GitHub Release, and attaches `checksums.txt`.
+
+Manual release runs are also available from the GitHub Actions UI via `workflow_dispatch`.
+
 ---
 
 ## License

@@ -20,6 +20,8 @@ import (
 	"github.com/ipanalytics/ipxray/internal/resolver"
 )
 
+var version = "dev"
+
 func main() {
 	if err := run(os.Args[1:]); err != nil {
 		fmt.Fprintln(os.Stderr, "ipxray:", err)
@@ -37,6 +39,9 @@ func run(args []string) error {
 		return err
 	}
 	switch args[0] {
+	case "version":
+		fmt.Println("ipxray", version)
+		return nil
 	case "init":
 		return config.EnsureLayout(home)
 	case "sync":
@@ -264,6 +269,7 @@ func usage() {
 
 Usage:
   ipxray init
+  ipxray version
   ipxray sync [--if-stale 24h] [--source <name>|all]
   ipxray sources
   ipxray freshness
