@@ -233,7 +233,7 @@ Findings
 }
 ```
 
-
+### Example: JSON Report Shape 8.8.8.8
 ```json
 {
   "subject": {
@@ -319,6 +319,51 @@ Findings
     "ASNforge",
     "IP-Knowledge-Layer",
     "RouteSentinel"
+  ]
+}
+```
+
+### Example: JSON Report Shape AS15169
+```json
+{
+  "subject": {
+    "type": "asn",
+    "value": "AS15169"
+  },
+  "status": "resolved",
+  "facts": [
+    {
+      "key": "origin_asn",
+      "value": {
+        "asn": "AS15169",
+        "org": "Google LLC"
+      },
+      "confidence": "high",
+      "based_on": [
+        "asn_org"
+      ],
+      "sources": [
+        "ASNforge"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "title": "Origin ASN context",
+      "meaning": "Routing evidence links this prefix or ASN to public network infrastructure.",
+      "caveat": "ASN ownership describes infrastructure, not the person using traffic from it.",
+      "confidence": "high",
+      "sources": [
+        "ASNforge"
+      ]
+    }
+  ],
+  "source_freshness": {
+    "ASNforge": "26m0s"
+  },
+  "confidence": "high",
+  "sources": [
+    "ASNforge"
   ]
 }
 ```
