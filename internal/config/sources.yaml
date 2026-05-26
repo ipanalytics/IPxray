@@ -1,0 +1,24 @@
+sources:
+  asnforge:
+    repo: ipanalytics/ASNforge
+    type: prefix_asn
+    artifacts: [releases/latest/asnforge-prefixes.jsonl.gz, releases/latest/asnforge-asn.jsonl.gz, releases/latest/asnforge.mmdb.gz]
+  bogonforge:
+    repo: ipanalytics/BogonForge
+    type: special_use_policy
+    artifacts: [releases/latest/bogonforge.jsonl.gz, releases/latest/bogonforge-asn.jsonl.gz]
+  routesentinel:
+    repo: ipanalytics/RouteSentinel
+    type: routing_security
+    artifacts: [releases/latest/route-origin-status.csv, releases/latest/rpki-invalids.csv, releases/latest/rpki-covered-prefixes.csv]
+  ip_knowledge_layer:
+    repo: ipanalytics/IP-Knowledge-Layer
+    type: unified_ip_knowledge
+    artifacts: [releases/latest/ip-knowledge.jsonl, releases/latest/ip-knowledge.csv]
+  tor_radar:        { repo: ipanalytics/Tor-Radar,        type: tor,             artifacts: [contents/main/data/current/network.json] }
+  crawlerscope:     { repo: ipanalytics/CrawlerScope,     type: crawler,         artifacts: [contents/main/data/current/crawlers.json] }
+  geoforge:         { repo: ipanalytics/GeoForge,         type: geoip_consensus, artifacts: [] }
+  geofeed_harvester:{ repo: ipanalytics/GeoFeed-Harvester,type: geofeed,         artifacts: [releases/latest/geofeed.csv.gz, releases/latest/geofeed.jsonl.gz] }
+  sat_geoip:        { repo: ipanalytics/Sat-geoip,        type: satellite_geoip, artifacts: [releases/latest/sat-geoip-prefixes.jsonl, releases/latest/sat-geoip-prefixes.csv, releases/latest/sat-geoip.mmdb] }
+  blackroute:       { repo: ipanalytics/BlackRoute,       type: hostile_infra,   artifacts: [] }
+  vpn_lab:          { repo: ipanalytics/VPN-Infrastructure-Intelligence-Lab, type: vpn_aggregate, artifacts: [contents/main/data/atlas_asn_summary.csv] }
