@@ -233,6 +233,96 @@ Findings
 }
 ```
 
+
+```json
+{
+  "subject": {
+    "type": "ip",
+    "value": "8.8.8.8",
+    "matched_prefix": "8.8.8.0/24"
+  },
+  "status": "resolved",
+  "facts": [
+    {
+      "key": "ip_context",
+      "value": {
+        "asn": "",
+        "asn_name": "",
+        "confidence": "0.97",
+        "country": "",
+        "layer": "hosting-cloud",
+        "prefix": "8.8.8.0/24",
+        "provider": "Google",
+        "region": "",
+        "service": "",
+        "source_id": "gcp-goog",
+        "source_type": "official_json",
+        "source_url": "https://www.gstatic.com/ipranges/goog.json",
+        "tags": "google|internet-platform",
+        "updated_at": "2026-05-26T04:47:07Z"
+      },
+      "confidence": "medium",
+      "based_on": ["ip_context"],
+      "sources": ["IP-Knowledge-Layer"]
+    },
+    {
+      "key": "origin_asn",
+      "value": {
+        "asn": "AS15169",
+        "org": "Google LLC"
+      },
+      "confidence": "high",
+      "based_on": ["asn_org"],
+      "sources": ["ASNforge"]
+    },
+    {
+      "key": "rpki_status",
+      "value": {
+        "asn": "AS15169",
+        "status": "valid"
+      },
+      "confidence": "high",
+      "based_on": ["rpki_status"],
+      "sources": ["RouteSentinel"]
+    }
+  ],
+  "findings": [
+    {
+      "title": "Infrastructure context",
+      "meaning": "Public dataset signal \"ip_context\" is present.",
+      "caveat": "Treat this as infrastructure context, not a verdict about a user.",
+      "confidence": "medium",
+      "sources": ["IP-Knowledge-Layer"]
+    },
+    {
+      "title": "Origin ASN context",
+      "meaning": "Routing evidence links this prefix or ASN to public network infrastructure.",
+      "caveat": "ASN ownership describes infrastructure, not the person using traffic from it.",
+      "confidence": "high",
+      "sources": ["ASNforge"]
+    },
+    {
+      "title": "Route authorization",
+      "meaning": "RPKI evidence is available for this route: map[asn:AS15169 status:valid].",
+      "caveat": "RPKI describes route authorization, not intent or user identity.",
+      "confidence": "high",
+      "sources": ["RouteSentinel"]
+    }
+  ],
+  "source_freshness": {
+    "ASNforge": "24m0s",
+    "IP-Knowledge-Layer": "23m0s",
+    "RouteSentinel": "23m0s"
+  },
+  "confidence": "high",
+  "sources": [
+    "ASNforge",
+    "IP-Knowledge-Layer",
+    "RouteSentinel"
+  ]
+}
+```
+
 ---
 
 ## Outputs and Artifacts
