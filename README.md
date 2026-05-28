@@ -3,7 +3,7 @@
 Local, offline IP intelligence resolution for IP addresses, CIDR ranges, and ASNs. `ipxray` syncs public release artifacts from the [`ipanalytics`](https://github.com/ipanalytics) ecosystem, builds local indexes, and returns explainable infrastructure context with provenance, freshness, and coarse confidence.
 
 <p align="center">
-  <img src="./site/banner.svg" alt="ipxray project banner" width="100%">
+  <img src="./site/banner.png" alt="ipxray project banner" width="100%">
 </p>
 
 <p align="center">
